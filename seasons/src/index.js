@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import SeasonDisplay from "./SeasonDisplay";
+import Spinner from "./Spinner";
 
 class App extends React.Component {
   state = { lat: null, errorMessage: "" };
@@ -13,20 +14,18 @@ class App extends React.Component {
     );
   }
 
-  // componentDidUpdate() {
-  //   console.log("My component was just updated.");
-  // }
-
-  // React says we have to define render!!
-  // just return JSX, nothing else
-  render() {
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>;
     } else if (!this.state.errorMessage && !this.state.lat) {
-      return <div>Loading...</div>;
+      return <Spinner message="Please Accept Location Request" />;
     } else if (!this.state.errorMessage && this.state.lat) {
       return <SeasonDisplay lat={this.state.lat} />;
     }
+  }
+
+  render() {
+    return <div>{this.renderContent()}</div>;
   }
 }
 
