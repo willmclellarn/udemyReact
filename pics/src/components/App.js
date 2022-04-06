@@ -7,7 +7,6 @@ class App extends React.Component {
   state = { images: [] };
 
   onSearchSubmit = async (term) => {
-    console.log(term);
     const response = await unsplash.get("/search/photos", {
       params: { query: term },
     });
